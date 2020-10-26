@@ -49,14 +49,13 @@ Use your package manager to install Wine. On MacOS do:
 
 ```
 brew cask install xquartz
-brew install wine
+brew install wine-stable
 ```
 
 Now let's prepare our environment. Under our root path we will set the Wine environment from which our tools will be used:
 
 ```
 mkdir $GENDEV/wine
-WINEDEBUG=-all WINEARCH=win32 WINEPREFIX=$GENDEV/wine wineboot
 ```
 
 ### 3. Install SGDK
@@ -77,7 +76,7 @@ Next command will open the Windows terminal inside our Wine environment, and sin
 
 ```
 cd path/where/jdk/is/downloaded
-WINEPREFIX=$GENDEV/wine wine cmd
+WINEPREFIX=$GENDEV/wine wine64 cmd
 ```
 
 The prompt will change to a Windows one, but you will still be in the same folder as the JDK, so to install simply do as:
@@ -90,7 +89,7 @@ Last but not least, you need to update the `%PATH%` variable on your wine enviro
 In my case I had to append: `;C:\Program Files\Java\jdk1.8.0_181\bin` . To open the registry do:
 
 ```
-WINEPREFIX=$GENDEV/wine wine regedit
+WINEPREFIX=$GENDEV/wine wine64 regedit
 ```
 
 Navigate to: `HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment`
@@ -102,7 +101,7 @@ Ook, we are ready to compile `libmd` as instructed on SGDK instructions. Again w
 
 ```
 WINEPREFIX=$GENDEV/wine wine cmd
-Z:\> %GDK_WIN%\bin\make -f %GDK_WIN%\makelib.gen
+Z:\> %GDK_WIN%\bin\make -f %GDK_WIN%\makelib.gen # TODO Does not execute with Cataline
 ```
 
 ### 5. Install GensK
